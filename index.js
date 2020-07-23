@@ -77,7 +77,7 @@ app.get('/twitter/callback', (req, res) => {
         //   userToken,
         //   userTokenSecret
         // }
-        let addDoc = db.collection(conf.collection).doc(user.userId).set({ ...user, lastUpdate: new Date().toISOString() }).then(ref => {
+        let addDoc = db.collection(conf.collection).doc(user.userId).set(user, {merge: true}).then(ref => {
             if (conf.appurl) {
                 res.redirect(conf.appurl)
             } else {
